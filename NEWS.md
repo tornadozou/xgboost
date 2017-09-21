@@ -3,7 +3,30 @@ XGBoost Change Log
 
 This file records the changes in xgboost library in reverse chronological order.
 
-## brick: next release candidate
+## in progress version
+* Updated Sklearn API
+  - Updated to allow use of all XGBoost parameters via **kwargs.
+  - Updated nthread to n_jobs and seed to random_state (as per Sklearn convention).
+* Refactored gbm to allow more friendly cache strategy
+  - Specialized some prediction routine
+* Automatically remove nan from input data when it is sparse.
+  - This can solve some of user reported problem of istart != hist.size
+* Minor fixes
+  - Thread local variable is upgraded so it is automatically freed at thread exit.
+* Migrate to C++11
+  - The current master version now requires C++11 enabled compiled(g++4.8 or higher)
+* New functionality
+  - Ability to adjust tree model's statistics to a new dataset without changing tree structures.
+  - Extracting feature contributions to individual predictions.
+* R package:
+  - New parameters:
+    - `silent` in `xgb.DMatrix()`
+    - `use_int_id` in `xgb.model.dt.tree()`
+    - `predcontrib` in `predict()`
+  - Default value of the `save_period` parameter in `xgboost()` changed to NULL (consistent with `xgb.train()`).
+
+## v0.6 (2016.07.29)
+* Version 0.5 is skipped due to major improvements in the core
 * Major refactor of core library.
   - Goal: more flexible and modular code as a portable library.
   - Switch to use of c++11 standard code.
@@ -31,7 +54,17 @@ This file records the changes in xgboost library in reverse chronological order.
 * JVM Package
   - Enable xgboost4j for java and scala
   - XGBoost distributed now runs on Flink and Spark.
-
+* Support model attributes listing for meta data.
+  - https://github.com/dmlc/xgboost/pull/1198
+  - https://github.com/dmlc/xgboost/pull/1166
+* Support callback API
+  - https://github.com/dmlc/xgboost/issues/892
+  - https://github.com/dmlc/xgboost/pull/1211
+  - https://github.com/dmlc/xgboost/pull/1264
+* Support new booster DART(dropout in tree boosting)
+  - https://github.com/dmlc/xgboost/pull/1220
+* Add CMake build system
+  - https://github.com/dmlc/xgboost/pull/1314
 
 ## v0.47 (2016.01.14)
 
